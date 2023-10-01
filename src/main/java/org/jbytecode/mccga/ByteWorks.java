@@ -17,6 +17,15 @@ public class ByteWorks {
         return bits;
     }
 
+    public static double[] floatsToDoubles(float[] fs){
+        int len = fs.length;
+        double[] doubles = new double[len];
+        for (int i = 0; i < len; i++){
+            doubles[i] = fs[i];
+        }
+        return doubles;
+    }
+
     public static int[] reverseBits(int[] bits) {
         int[] newbits = new int[bits.length];
         int m = 0;
