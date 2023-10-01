@@ -1,31 +1,23 @@
 package org.jbytecode.mccga;
 
 public class HookeJeeves {
-    
-    private static double[] clone(double[] x)  {
-        int n = x.length;
-        double[] result = new double[n];
-        System.arraycopy(x, 0, result, 0, n);
-        return result;
-    }
-    
-    private static double[] mutate(double[] par, int p, double d){
-        double[] newpar = clone(par);
+
+    private static double[] mutate(double[] par, int p, double d) {
+        double[] newpar = par.clone();
         newpar[p - 1] += d;
         return newpar;
     }
-    
+
     public static double[] hj(
-        OptimizationFunction f,
-        double [] parv,
-        int maxiter,
-        double startstep,
-        double endstep
-    ){
+            OptimizationFunction f,
+            double[] parv,
+            int maxiter,
+            double startstep,
+            double endstep) {
         int p = parv.length;
         double currentstep = startstep;
         int iter = 0;
-        double[] par = clone(parv);
+        double[] par = parv.clone();
         while (iter < maxiter) {
             double fold = f.f(par);
             double fnow = fold;
@@ -42,19 +34,19 @@ public class HookeJeeves {
                     fnow = fright;
                 }
             }
-    
+
             if (fold <= fnow) {
                 currentstep = currentstep / 2.0;
             }
-    
+
             if (currentstep < endstep) {
                 break;
             }
-    
+
             iter += 1;
         } // end of while
-    
+
         return par;
     }
-    
+
 }
