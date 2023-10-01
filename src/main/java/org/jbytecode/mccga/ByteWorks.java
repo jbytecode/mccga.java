@@ -6,8 +6,8 @@ public class ByteWorks {
         return Float.floatToRawIntBits(x);
     }
 
-    public static int[] floatToBits(float x) {
-        int intval = floatToBitwiseInt(x);
+    public static int[] floatToBits(final float x) {
+        final int intval = floatToBitwiseInt(x);
         int[] bits = new int[32];
         int m = 0;
         for (int i = 31; i >= 0; i--) {
@@ -17,8 +17,8 @@ public class ByteWorks {
         return bits;
     }
 
-    public static double[] floatsToDoubles(float[] fs){
-        int len = fs.length;
+    public static double[] floatsToDoubles(final float[] fs){
+        final int len = fs.length;
         double[] doubles = new double[len];
         for (int i = 0; i < len; i++){
             doubles[i] = fs[i];
@@ -26,7 +26,7 @@ public class ByteWorks {
         return doubles;
     }
 
-    public static int[] reverseBits(int[] bits) {
+    public static int[] reverseBits(final int[] bits) {
         int[] newbits = new int[bits.length];
         int m = 0;
         for (int i = 31; i >= 0; i--) {
@@ -46,9 +46,9 @@ public class ByteWorks {
         return Float.intBitsToFloat(u32value);
     }
 
-    public static int[] floatsToBits(float[] fs) {
-        int parlen = fs.length;
-        int bitlen = parlen * 32;
+    public static int[] floatsToBits(final float[] fs) {
+        final int parlen = fs.length;
+        final int bitlen = parlen * 32;
         int[] bits = new int[bitlen];
         int m = 0;
         for (int j = 0; j < parlen; j++) {
@@ -61,9 +61,9 @@ public class ByteWorks {
         return bits;
     }
 
-    public static float[] bitsToFloats(int[] v) {
-        int bitsize = v.length;
-        int floatssize = (int) (bitsize / 32);
+    public static float[] bitsToFloats(final int[] v) {
+        final int bitsize = v.length;
+        final int floatssize = (int) (bitsize / 32);
         float[] floatvector = new float[floatssize];
         int index = 0;
         int findex = 0;

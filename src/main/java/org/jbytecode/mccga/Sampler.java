@@ -2,7 +2,7 @@ package org.jbytecode.mccga;
 
 public class Sampler {
 
-    public static int[] sample(double[] probvector) {
+    public static int[] sample(final double[] probvector) {
         int len = probvector.length;
         int[] bits = new int[len];
         for (int i = 0; i < len; i++) {
@@ -15,7 +15,7 @@ public class Sampler {
         return bits;
     }
 
-    public static float[] getrandomvectorbetween(double[] mins, double[] maxs) {
+    public static float[] getrandomvectorbetween(final double[] mins, final double[] maxs) {
         int n = mins.length;
         float[] result = new float[n];
         for (int i = 0; i < n; i++) {
@@ -24,9 +24,9 @@ public class Sampler {
         return result;
     }
 
-    public static double[] generateProbabilityVector(double[] mins, double[] maxs, int ntries) {
-        int nbits = mins.length * 32;
-        double mutrate = 1.0 / (double) ntries;
+    public static double[] generateProbabilityVector(final double[] mins, final double[] maxs, int ntries) {
+        final int nbits = mins.length * 32;
+        final double mutrate = 1.0 / (double) ntries;
         double[] probvector = new double[nbits];
         for (int i = 0; i < ntries; i++) {
             float[] floats = getrandomvectorbetween(mins, maxs);

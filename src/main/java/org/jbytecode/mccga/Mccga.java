@@ -5,13 +5,13 @@ public class Mccga {
         System.out.println("MCCGA - Machine-coded Compact Genetic Algorithm");
     }
 
-    private static double binarycost(OptimizationFunction fcost, int[] candidate) {
+    private static double binarycost(final OptimizationFunction fcost, final int[] candidate) {
         double[] doubles = ByteWorks.floatsToDoubles(ByteWorks.bitsToFloats(candidate));
-        double result = fcost.f(doubles);
+        final double result = fcost.f(doubles);
         return result;
     }
 
-    public static void update(double[] probvector, int[] winner, int[] loser, double mutrate) {
+    public static void update(double[] probvector, final int[] winner, final int[] loser, double mutrate) {
         for (int i = 0; i < probvector.length; i++) {
             if (winner[i] != loser[i]) {
                 if (winner[i] == 0) {
@@ -23,7 +23,7 @@ public class Mccga {
         }
     }
 
-    public static void mccga_singleiter(double[] probvect, OptimizationFunction fcost, double mutrate) {
+    public static void mccga_singleiter(double[] probvect, final OptimizationFunction fcost, double mutrate) {
         int[] candidate1 = Sampler.sample(probvect);
         int[] candidate2 = Sampler.sample(probvect);
         double cost1 = binarycost(fcost, candidate1);
@@ -41,7 +41,7 @@ public class Mccga {
         return Math.abs(x - other) <= mutrate;
     }
 
-    public static boolean isconverged(double[] probvector, double mutrate) {
+    public static boolean isconverged(final double[] probvector, double mutrate) {
         int n = probvector.length;
         int satisfied = 0;
         for (int i = 0; i < n; i++) {
@@ -56,11 +56,12 @@ public class Mccga {
     }
 
     public static double[] mccga(
-            OptimizationFunction fcost,
-            double[] mins,
-            double[] maxs,
+            final OptimizationFunction fcost,
+            final double[] mins,
+            final double[] maxs,
             double mutrate,
             int maxiter) {
+        
         double[] probvect = Sampler.generateProbabilityVector(mins, maxs, 500000);
 
         int iter = 0;

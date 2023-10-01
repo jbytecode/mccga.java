@@ -2,18 +2,18 @@ package org.jbytecode.mccga;
 
 public class HookeJeeves {
 
-    private static double[] mutate(double[] par, int p, double d) {
+    private static double[] mutate(final double[] par, int p, double d) {
         double[] newpar = par.clone();
         newpar[p - 1] += d;
         return newpar;
     }
 
     public static double[] hj(
-            OptimizationFunction f,
-            double[] parv,
-            int maxiter,
-            double startstep,
-            double endstep) {
+            final OptimizationFunction f,
+            final double[] parv,
+            final int maxiter,
+            final double startstep,
+            final double endstep) {
         int p = parv.length;
         double currentstep = startstep;
         int iter = 0;
