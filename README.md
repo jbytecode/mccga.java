@@ -25,14 +25,14 @@ OptimizationFunction of = new OptimizationFunction() {
         }
     };
 
-    double eps = 0.001;
-    double[] exp = new double[] { 3.14159265, 2.718282 };
+double eps = 0.001;
+double[] exp = new double[] { 3.14159265, 2.718282 };
 
-    double[] mins = new double[] { -100.0, -100.0 };
-    double[] maxs = new double[] { 100.0, 100.0 };
+double[] mins = new double[] { -100.0, -100.0 };
+double[] maxs = new double[] { 100.0, 100.0 };
 
-    double mutrate = 0.001;
-    int maxiter = 10000;
+double mutrate = 0.001;
+int maxiter = 10000;
 
-    double[] result = Mccga.mccga(of, mins, maxs, mutrate, maxiter);
+double[] result = Mccga.mccga(of, mins, maxs, mutrate, maxiter);
 ```
