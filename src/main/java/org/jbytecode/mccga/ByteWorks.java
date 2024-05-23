@@ -36,7 +36,7 @@ public class ByteWorks {
         return newbits;
     }
 
-    public static float bitsToFloat(int[] bits) {
+    public static float bitsToFloat(final int[] bits) {
         int u32value = 0;
         int m = 0;
         for (int i = 31; i >= 0; i--) {
