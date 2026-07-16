@@ -4,8 +4,35 @@ public class HookeJeeves {
 
     private static double[] mutate(final double[] par, int p, double d) {
         double[] newpar = par.clone();
-        newpar[p - 1] += d;
+        newpar[p] += d;
         return newpar;
+    }
+
+    private static double[] exploratorySearch(
+            final OptimizationFunction f,
+            final double[] start,
+            final double step) {
+        double[] point = start.clone();
+        double best = f.f(point);
+
+        for (int p = 0; p < point.length; p++) {
+            double[] left = mutate(point, p, -step);
+            double fleft = f.f(left);
+            if (fleft < best) {
+                point = left;
+                best = fleft;
+                continue;
+            }
+
+            double[] right = mutate(point, p, step);
+            double fright = f.f(right);
+            if (fright < best) {
+                point = right;
+                best = fright;
+            }
+        }
+
+        return point;
     }
 
     public static double[] hj(
@@ -14,28 +41,28 @@ public class HookeJeeves {
             final int maxiter,
             final double startstep,
             final double endstep) {
-        int p = parv.length;
         double currentstep = startstep;
         int iter = 0;
-        double[] par = parv.clone();
-        while (iter < maxiter) {
-            double fold = f.f(par);
-            double fnow = fold;
-            for (int currentp = 1; currentp <= p; currentp++) {
-                double[] mutateleft = mutate(par, currentp, -currentstep);
-                double fleft = f.f(mutateleft);
-                double[] mutateright = mutate(par, currentp, currentstep);
-                double fright = f.f(mutateright);
-                if (fleft < fold) {
-                    par = mutateleft;
-                    fnow = fleft;
-                } else if (fright < fold) {
-                    par = mutateright;
-                    fnow = fright;
-                }
-            }
+        double[] base = parv.clone();
 
-            if (fold <= fnow) {
+        while (iter < maxiter) {
+            double[] explored = exploratorySearch(f, base, currentstep);
+            double fbase = f.f(base);
+            double fexplored = f.f(explored);
+
+            if (fexplored < fbase) {
+                double[] pattern = new double[base.length];
+                for (int i = 0; i < pattern.length; i++) {
+                    pattern[i] = explored[i] + (explored[i] - base[i]);
+                }
+
+                double[] patternExplored = exploratorySearch(f, pattern, currentstep);
+                if (f.f(patternExplored) < fexplored) {
+                    base = patternExplored;
+                } else {
+                    base = explored;
+                }
+            } else {
                 currentstep = currentstep / 2.0;
             }
 
@@ -46,7 +73,7 @@ public class HookeJeeves {
             iter += 1;
         } // end of while
 
-        return par;
+        return base;
     }
 
 }
